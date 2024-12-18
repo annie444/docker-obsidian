@@ -22,7 +22,7 @@ RUN curl -o \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
   if [ -z ${OBSIDIAN_VERSION+x} ]; then \
-    OBSIDIAN_VERSION=$(curl -sX GET "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest"| awk '/tag_name/{print $4;exit}' FS='[""]'); \
+    OBSIDIAN_VERSION=$(curl -sX GET "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]'); \
   fi && \
   apt-get install -y --no-install-recommends \
     chromium \
