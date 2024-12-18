@@ -32,6 +32,7 @@ RUN curl -o \
     libatk-bridge2.0 \
     libnss3 \
     python3-xdg && \
+  mkdir /opt && \
   cd /tmp && \
   if [ -z ${OBSIDIAN_VERSION+x} ]; then \
     OBSIDIAN_VERSION=$(curl -sX GET "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]'); \
