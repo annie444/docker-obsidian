@@ -16,6 +16,8 @@ WORKDIR $HOME
 # title
 ENV TITLE=Obsidian
 
+USER root
+
 RUN curl -o \
     /usr/share/backgrounds/bg_default.png \
     https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/obsidian-logo.png && \
