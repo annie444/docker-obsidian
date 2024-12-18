@@ -21,9 +21,6 @@ RUN curl -o \
     https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/obsidian-logo.png && \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
-  if [ -z ${OBSIDIAN_VERSION+x} ]; then \
-    OBSIDIAN_VERSION=$(curl -sX GET "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]'); \
-  fi && \
   apt-get install -y --no-install-recommends \
     chromium \
     chromium-l10n \
@@ -34,6 +31,9 @@ RUN curl -o \
     libnss3 \
     python3-xdg && \
   cd /tmp && \
+  if [ -z ${OBSIDIAN_VERSION+x} ]; then \
+    OBSIDIAN_VERSION=$(curl -sX GET "https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest" | awk '/tag_name/{print $4;exit}' FS='[""]'); \
+  fi && \
   curl -o \
     /tmp/obsidian.app -L \
     "https://github.com/obsidianmd/obsidian-releases/releases/download/${OBSIDIAN_VERSION}/Obsidian-$(echo ${OBSIDIAN_VERSION} | sed 's/v//g').AppImage" && \
