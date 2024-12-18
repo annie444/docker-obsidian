@@ -24,8 +24,8 @@ RUN curl -o \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive \
   apt-get install -y --no-install-recommends \
-    chromium \
-    chromium-l10n \
+    chromium-browser \
+    chromium-browser-l10n \ 
     git \
     libgtk-3-bin \
     libatk1.0 \
