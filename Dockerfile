@@ -10,6 +10,7 @@ LABEL maintainer="quietsy"
 ENV HOME /home/kasm-default-profile
 ENV STARTUPDIR /dockerstartup
 ENV INST_SCRIPTS $STARTUPDIR/install
+ENV OBSIDIAN_VERSION=${OBSIDIAN_VERSION}
 WORKDIR $HOME
 
 # title
