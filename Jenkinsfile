@@ -368,27 +368,18 @@ pipeline {
                     docker tag ${IMAGE}:amd64-${META_TAG} ${i}:amd64-${COMMIT_SHA}-${BUILD_NUMBER}
                   done
                '''
-            withCredentials([
-              [
-                $class: 'UsernamePasswordMultiBinding',
-                credentialsId: 'Quay.io-Robot',
-                usernameVariable: 'QUAYUSER',
-                passwordVariable: 'QUAYPASS'
-              ]
-            ]) {
-              retry_backoff(5,5) {
-                  sh '''#! /bin/bash
-                        set -e
-                        echo $GITHUB_TOKEN | docker login ghcr.io -u ${LS_USER} --password-stdin
-                        if [[ "${PACKAGE_CHECK}" != "true" ]]; then
-                          IFS=',' read -ra CACHE <<< "$BUILDCACHE"
-                          for i in "${CACHE[@]}"; do
-                            docker push ${i}:amd64-${COMMIT_SHA}-${BUILD_NUMBER} &
-                          done
-                          wait
-                        fi
-                    '''
-              }
+            retry_backoff(5,5) {
+                sh '''#! /bin/bash
+                      set -e
+                      echo $GITHUB_TOKEN | docker login ghcr.io -u ${LS_USER} --password-stdin
+                      if [[ "${PACKAGE_CHECK}" != "true" ]]; then
+                        IFS=',' read -ra CACHE <<< "$BUILDCACHE"
+                        for i in "${CACHE[@]}"; do
+                          docker push ${i}:amd64-${COMMIT_SHA}-${BUILD_NUMBER} &
+                        done
+                        wait
+                      fi
+                  '''
             }
           }
         }
@@ -422,27 +413,18 @@ pipeline {
                     docker tag ${IMAGE}:arm64v8-${META_TAG} ${i}:arm64v8-${COMMIT_SHA}-${BUILD_NUMBER}
                   done
                '''
-            withCredentials([
-              [
-                $class: 'UsernamePasswordMultiBinding',
-                credentialsId: 'Quay.io-Robot',
-                usernameVariable: 'QUAYUSER',
-                passwordVariable: 'QUAYPASS'
-              ]
-            ]) {
-              retry_backoff(5,5) {
-                  sh '''#! /bin/bash
-                        set -e
-                        echo $GITHUB_TOKEN | docker login ghcr.io -u ${LS_USER} --password-stdin
-                        if [[ "${PACKAGE_CHECK}" != "true" ]]; then
-                          IFS=',' read -ra CACHE <<< "$BUILDCACHE"
-                          for i in "${CACHE[@]}"; do
-                            docker push ${i}:arm64v8-${COMMIT_SHA}-${BUILD_NUMBER} &
-                          done
-                          wait
-                        fi
-                    '''
-              }
+            retry_backoff(5,5) {
+                sh '''#! /bin/bash
+                      set -e
+                      echo $GITHUB_TOKEN | docker login ghcr.io -u ${LS_USER} --password-stdin
+                      if [[ "${PACKAGE_CHECK}" != "true" ]]; then
+                        IFS=',' read -ra CACHE <<< "$BUILDCACHE"
+                        for i in "${CACHE[@]}"; do
+                          docker push ${i}:arm64v8-${COMMIT_SHA}-${BUILD_NUMBER} &
+                        done
+                        wait
+                      fi
+                  '''
             }
             sh '''#! /bin/bash
                   containers=$(docker ps -aq)
