@@ -24,7 +24,7 @@ pipeline {
     DEV_IMAGE = 'annie444/dev-obsidian'
     PR_IMAGE = 'annie444/pr-obsidian'
     DIST_IMAGE = 'ubuntu'
-    MULTIARCH='false'
+    MULTIARCH='trufalsee'
     TITLE='Obsidian.md'
     CI='false'
     CI_WEB='false'
