@@ -39,7 +39,7 @@ RUN curl -o \
   fi && \
   curl -o \
     /tmp/obsidian.app -L \
-    "https://github.com/obsidianmd/obsidian-releases/releases/download/${OBSIDIAN_VERSION}/Obsidian-$(echo ${OBSIDIAN_VERSION} | sed 's/v//g').AppImage" && \
+    "https://github.com/obsidianmd/obsidian-releases/releases/download/${OBSIDIAN_VERSION}/Obsidian-$(echo ${OBSIDIAN_VERSION} | sed 's/v//g')-arm64.AppImage" && \
   chmod +x /tmp/obsidian.app && \
   ./obsidian.app --appimage-extract && \
   mv squashfs-root /opt/obsidian && \
