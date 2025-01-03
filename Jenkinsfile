@@ -12,8 +12,8 @@ pipeline {
   }
   // Configuration for the variables used for this specific repo
   environment {
-    GITHUB_TOKEN = credentials('ea102c7a-6fe2-4343-8c84-25459ebce914')
-    GIT_SIGNING_KEY = credentials('fa438828-77be-4720-80b5-006c6243f5a6') 
+    GITHUB_TOKEN = credentials('62cf71a9-6168-48cb-89cf-af0f04c752f2')
+    GIT_SIGNING_KEY = credentials('7fd3fbe4-e8ca-4d0f-8aa2-8c55ef937b73') 
     BUILD_VERSION_ARG = 'OBSIDIAN_VERSION' 
     LS_USER = 'annie444'
     LS_REPO = 'docker-obsidian' 
@@ -114,9 +114,9 @@ pipeline {
        Package Version Tagging
        ####################### */
     // Grab the current package versions in Git to determine package tag
-    stage("Set Package tag"){
-      steps{
-        script{
+    stage("Set Package tag") {
+      steps {
+        script {
           env.PACKAGE_TAG = sh(
             script: '''#!/bin/bash
                        if [ -e package_versions.txt ] ; then
